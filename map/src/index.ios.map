@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "index.ios.js",
+  "sourceRoot": "../../src",
+  "sources": [
+    "index.ios.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,IAAA,GAAO,IAAA,CAAK,cAAL;;AAEP,IAAI,CAAC,aAAL,CAEE;EAAA,MAAA,EAAQ,SAAA,GAAA,CAAR;CAFF;;AAKA,MAAM,CAAC,OAAP,GAAiB,IAAI,CAAC,SAAL,CAAA"
+}
