@@ -1,5 +1,23 @@
 {
   "name": "google-signin",
   "version": "1.0.0",
-  "main": "js/src/index"
+  "main": "js/src/index",
+  "dependencies": {
+    "ArrayOf": "aleclarson/ArrayOf#1.0.0",
+    "Maybe": "aleclarson/Maybe#1.0.0",
+    "Promise": "aleclarson/Promise#1.0.0",
+    "Type": "aleclarson/Type#1.0.0",
+    "assertTypes": "aleclarson/assertTypes#1.0.0",
+    "event": "aleclarson/event#2.0.0",
+    "isConstructor": "aleclarson/isConstructor#1.0.0"
+  },
+  "lotus": {
+    "plugins": [
+      "lotus-coffee"
+    ],
+    "implicitDependencies": [
+      "NativeModules",
+      "RCTNativeAppEventEmitter"
+    ]
+  }
 }

@@ -13,92 +13,76 @@
 
 &nbsp;
 
-## install
+## usage
 
-Use these steps to manually install this library.
-
-CocoaPods is not yet supported.
-
-#### Step 1
-
-Drag `ios/RNGoogleSignIn.xcodeproj` into your own `*.xcodeproj`.
-
-#### Step 2
-
-- Select your project in the `Project Navigator` sidebar.
-
-- Goto `Target > Info > URL Types`.
-
-- Create a new URL type.
-
-- Set the `URL Schemes` field to the value of `REVERSED_CLIENT_ID` in the config file you download from [this link.](https://developers.google.com/identity/sign-in/ios/sdk/#get-config)
-
-This step sets up a custom URL scheme that the Google Sign-In SDK will
-use to redirect the user back to your iOS application.
-
-#### Step 3
-
-- Select your project in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Phases > Link Binary With Libraries`.
-
-- Add these frameworks:
-
-  - `SystemConfiguration.framework`
-
-  - `SafariServices.framework`
-
-  - `AddressBook.framework`
-
-This step links any frameworks that the Google Sign-In SDK
-needs to work properly.
-
-#### Step 4
-
-- Select your project in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Settings > Search Paths`.
-
-- Add `$(BUILT_PRODUCTS_DIR)/include` to `Header Search Paths`.
-
-- Make sure the search path is marked as `recursive`.
-
-This step makes the public headers of `RNGoogleSignIn` visible
-to your own project's code.
-
-#### Step 5
-
-Now you can import the library as seen below:
-
-```objc
-#import <RNGoogleSignIn/RNGoogleSignIn.h>
+```coffee
+GoogleSignIn = require "google-signin"
 ```
 
-#### Step 6
+#### GoogleSignIn.configure()
 
-Some manual modifications to `React.xcodeproj` are needed
-before everything works as expected.
+Use the `configure` method before anything else!
 
-- Select `React.xcodeproj` in the `Project Navigator` sidebar.
+You must pass an object with these properties:
 
-- Goto `Target > Build Phases`.
+- `clientID: String` - **Required** The client identifier from the [API console](https://console.developers.google.com)
+- `serverID: String` - Required if you need to make requests from your server
+- `scopes: Array | Void` - The [OAuth scopes](https://developers.google.com/identity/protocols/googlescopes) that you need to access
 
-- Create a new `Headers` phase.
+#### GoogleSignIn.willConnect
 
-- Add every `*.h` file into the `Public` section.
-  (not every header is needed, but this way requires less thinking)
+This is an [`Event`](https://github.com/aleclarson/event) that emits
+when the native code has determined how it will authorize the user
+(eg: using Safari or the native Google app).
 
-- Goto `Target > Build Settings > Packaging`.
+You should show a loading indicator until this event emits.
 
-- Set `Public Headers Folder Path` to `include/$(PRODUCT_NAME)`.
+#### GoogleSignIn.signIn()
 
-This step makes the public headers of `React` visible
-to the code of `RNGoogleSignIn`.
+This function returns a [`Promise`](https://github.com/aleclarson/Promise)
+that resolves into an object with these properties:
 
-Now you can import something from `React` in a different way:
+- `id: String` - The user's unique identifier.
+- `accessToken: String` - A string for authorizing requests.
+- `accessTokenExpirationDate: String` - When the `accessToken` expires.
 
-```objc
-#import <React/RCTRootView.h>
-```
+If you configured a `serverID`, the promise's result will also have these properties:
 
-&nbsp;
+- `serverAuthCode: String`
+- `idToken: String`
+- `idTokenExpirationDate: String` - When the `idToken` expires.
+
+If you added `https://www.googleapis.com/auth/userinfo.profile` to the scopes array,
+the promise's result will also have these properties:
+
+- `name: String` - The user's full name.
+- `givenName: String` - The user's first name.
+- `familyName: String` - The user's last name.
+- `image: String | Null` - The user's profile picture. (120x120)
+
+If you added `https://www.googleapis.com/auth/userinfo.email` to the scopes array,
+the promise's result will include an `email: String` property.
+
+You can optionally pass `{ silent: true }` as the first argument
+if you want to sign into the account most recently used with your app.
+
+#### GoogleSignIn.isConnected()
+
+This function returns a [`Promise`](https://github.com/aleclarson/Promise)
+that resolves into `true` if a user is currently authorized.
+
+#### GoogleSignIn.signOut()
+
+This function marks the current user as signed out.
+
+The OAuth 2.0 token is **NOT** removed from the keychain.
+
+The return value is always `undefined`.
+
+#### GoogleSignIn.disconnect()
+
+This function returns a [`Promise`](https://github.com/aleclarson/Promise)
+that resolves when the current user has successfully revoked its authentication.
+The `Promise` will be rejected if the request fails.
+
+Do **NOT** call `signOut` if you already called this function.

@@ -1,6 +1,5 @@
 
 #import <React/RCTEventDispatcher.h>
-
 #import "RNGoogleSignIn.h"
 
 @implementation RNGoogleSignIn
@@ -9,18 +8,16 @@ RCT_EXPORT_MODULE();
 
 @synthesize bridge = _bridge;
 
-RCT_EXPORT_METHOD(configure:(NSArray*)scopes iosClientId:(NSString*)iosClientId webClientId:(NSString*)webClientId)
+RCT_EXPORT_METHOD(configure:(NSDictionary*)config)
 {
   GIDSignIn *signIn = [GIDSignIn sharedInstance];
   signIn.delegate = self;
   signIn.uiDelegate = self;
 
-  signIn.scopes = scopes;
-  signIn.clientID = iosClientId;
-
-  if (webClientId.length != 0) {
-    signIn.serverClientID = webClientId;
-  }
+  signIn.scopes = config[@"scopes"];
+  signIn.clientID = config[@"clientID"];
+  signIn.serverClientID = config[@"serverID"];
+  signIn.shouldFetchBasicProfile = NO;
 }
 
 RCT_EXPORT_METHOD(signIn)
@@ -38,6 +35,11 @@ RCT_EXPORT_METHOD(signOut)
   [[GIDSignIn sharedInstance] signOut];
 }
 
+RCT_EXPORT_METHOD(isConnected:(RCTPromiseResolveBlock)resolve)
+{
+  resolve(@([GIDSignIn sharedInstance].hasAuthInKeychain));
+}
+
 RCT_EXPORT_METHOD(disconnect)
 {
   [[GIDSignIn sharedInstance] disconnect];
@@ -52,39 +54,48 @@ RCT_EXPORT_METHOD(disconnect)
 {
   if (error != nil) {
     return [_bridge.eventDispatcher
-      sendAppEventWithName:@"RNGoogleSignInError"
+      sendAppEventWithName:@"RNGoogleSignIn.connectFailed"
       body:@{
         @"message": error.description,
         @"code": [NSNumber numberWithInteger: error.code]
       }];
   }
 
-  NSURL *imageURL;
+  NSMutableDictionary *body = [NSMutableDictionary dictionaryWithDictionary:@{
+    @"accessToken": user.authentication.accessToken,
+    @"accessTokenExpirationDate": [NSNumber numberWithDouble:user.authentication.accessTokenExpirationDate.timeIntervalSince1970],
+  }];
 
-  if (user.profile.hasImage) {
-    imageURL = [user.profile imageURLWithDimension:120];
+  if (user.serverAuthCode) {
+    [body setValuesForKeysWithDictionary:@{
+      @"idToken": user.authentication.idToken,
+      @"idTokenExpirationDate": [NSNumber numberWithDouble:user.authentication.idTokenExpirationDate.timeIntervalSince1970],
+      @"serverAuthCode": user.serverAuthCode ? user.serverAuthCode : [NSNull null],
+    }];
+  }
+
+  if (user.userID) {
+    GIDProfileData *profile = user.profile;
+    NSURL *imageURL = profile.hasImage ? [profile imageURLWithDimension:120] : nil;
+    body[@"user"] = @{
+      @"id": user.userID,
+      @"name": profile.name,
+      @"givenName": profile.givenName,
+      @"familyName": profile.familyName,
+      @"email": profile.email ? profile.email : [NSNull null],
+      @"image": imageURL ? imageURL.absoluteString : [NSNull null],
+    };
   }
 
   return [_bridge.eventDispatcher
-    sendAppEventWithName:@"RNGoogleSignInSuccess"
-    body:@{
-      @"id": user.userID,
-      @"name": user.profile.name,
-      @"givenName": user.profile.givenName,
-      @"familyName": user.profile.familyName,
-      @"photo": imageURL ? imageURL.absoluteString : [NSNull null],
-      @"email": user.profile.email,
-      @"idToken": user.authentication.idToken,
-      @"accessToken": user.authentication.accessToken,
-      @"serverAuthCode": user.serverAuthCode ? user.serverAuthCode : [NSNull null],
-      @"accessTokenExpirationDate": [NSNumber numberWithDouble:user.authentication.accessTokenExpirationDate.timeIntervalSinceNow]
-    }];
+    sendAppEventWithName:@"RNGoogleSignIn.connected"
+    body:body];
 }
 
 - (void) signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error
 {
   return [_bridge.eventDispatcher
-    sendAppEventWithName:@"RNGoogleSignInWillDispatch"
+    sendAppEventWithName:@"RNGoogleSignIn.connecting"
     body:@{}];
 }
 
@@ -92,7 +103,7 @@ RCT_EXPORT_METHOD(disconnect)
 {
   if (error != nil) {
     return [_bridge.eventDispatcher
-      sendAppEventWithName:@"RNGoogleRevokeError"
+      sendAppEventWithName:@"RNGoogleSignIn.disconnectFailed"
       body:@{
         @"message": error.description,
         @"code": [NSNumber numberWithInteger: error.code]
@@ -100,7 +111,7 @@ RCT_EXPORT_METHOD(disconnect)
   }
 
   return [_bridge.eventDispatcher
-    sendAppEventWithName:@"RNGoogleRevokeSuccess"
+    sendAppEventWithName:@"RNGoogleSignIn.disconnected"
     body:@{}];
 }
 

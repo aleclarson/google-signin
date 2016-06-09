@@ -22,7 +22,6 @@
 		11CC164E1CFF116F003A58DA /* GoogleNetworkingUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC164D1CFF116F003A58DA /* GoogleNetworkingUtilities */; };
 		11CC16501CFF1178003A58DA /* GoogleUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC164F1CFF1178003A58DA /* GoogleUtilities */; };
 		11CC16521CFF117B003A58DA /* GoogleSymbolUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16511CFF117B003A58DA /* GoogleSymbolUtilities */; };
-		11CC165A1CFF199C003A58DA /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16591CFF199C003A58DA /* libReact.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +41,6 @@
 		11CC164D1CFF116F003A58DA /* GoogleNetworkingUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleNetworkingUtilities; path = GoogleNetworkingUtilities.framework/GoogleNetworkingUtilities; sourceTree = SOURCE_ROOT; };
 		11CC164F1CFF1178003A58DA /* GoogleUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleUtilities; path = GoogleUtilities.framework/GoogleUtilities; sourceTree = SOURCE_ROOT; };
 		11CC16511CFF117B003A58DA /* GoogleSymbolUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleSymbolUtilities; path = GoogleSymbolUtilities.framework/GoogleSymbolUtilities; sourceTree = SOURCE_ROOT; };
-		11CC16591CFF199C003A58DA /* libReact.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libReact.a; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11CC165A1CFF199C003A58DA /* libReact.a in Frameworks */,
 				11CC16481CFF1152003A58DA /* GoogleSignIn in Frameworks */,
 				11CC16521CFF117B003A58DA /* GoogleSymbolUtilities in Frameworks */,
 				11CC164C1CFF1168003A58DA /* GoogleAuthUtilities in Frameworks */,
@@ -86,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				11CC15431CFE5DDB003A58DA /* GoogleSignIn.bundle */,
-				11CC16591CFF199C003A58DA /* libReact.a */,
 				11CC16511CFF117B003A58DA /* GoogleSymbolUtilities */,
 				11CC164F1CFF1178003A58DA /* GoogleUtilities */,
 				11CC164D1CFF116F003A58DA /* GoogleNetworkingUtilities */,
@@ -289,20 +285,22 @@
 		11CC153B1CFE5AAD003A58DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/**";
 			};
 			name = Debug;
 		};
 		11CC153C1CFE5AAD003A58DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/**";
 			};
 			name = Release;
 		};
