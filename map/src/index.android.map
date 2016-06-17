@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "index.android.js",
+  "sourceRoot": "../../src",
+  "sources": [
+    "index.android.coffee"
+  ],
+  "names": [],
+  "mappings": ""
+}
