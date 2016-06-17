@@ -6,7 +6,7 @@ assertTypes = require "assertTypes"
 Promise = require "Promise"
 ArrayOf = require "ArrayOf"
 Maybe = require "Maybe"
-Event = require "event"
+Event = require "Event"
 Type = require "Type"
 
 errorCodes =

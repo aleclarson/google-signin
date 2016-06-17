@@ -12,7 +12,7 @@ ArrayOf = require("ArrayOf");
 
 Maybe = require("Maybe");
 
-Event = require("event");
+Event = require("Event");
 
 Type = require("Type");
 
