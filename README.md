@@ -29,15 +29,14 @@ You must pass an object with these properties:
 - `serverID: String` - Required if you need to make requests from your server
 - `scopes: Array | Void` - The [OAuth scopes](https://developers.google.com/identity/protocols/googlescopes) that you need to access
 
-#### GoogleSignIn.willConnect
+**NOTE:** You must use the `"https://www.googleapis.com/auth/userinfo.profile"` scope if you want email and profile!
 
-This is an [`Event`](https://github.com/aleclarson/event) that emits
-when the native code has determined how it will authorize the user
-(eg: using Safari or the native Google app).
+#### GoogleSignIn.isConnected()
 
-You should show a loading indicator until this event emits.
+This function returns a [`Promise`](https://github.com/aleclarson/Promise)
+that resolves into `true` if a user is currently authorized.
 
-#### GoogleSignIn.signIn()
+#### GoogleSignIn.connect()
 
 This function returns a [`Promise`](https://github.com/aleclarson/Promise)
 that resolves into an object with these properties:
@@ -66,12 +65,25 @@ the promise's result will include an `email: String` property.
 You can optionally pass `{ silent: true }` as the first argument
 if you want to sign into the account most recently used with your app.
 
-#### GoogleSignIn.isConnected()
+#### GoogleSignIn.willConnect
 
-This function returns a [`Promise`](https://github.com/aleclarson/Promise)
-that resolves into `true` if a user is currently authorized.
+An [`Event`](https://github.com/aleclarson/event) that emits
+when the native code has determined how it will authorize the user
+(eg: using Safari or the native Google app).
 
-#### GoogleSignIn.signOut()
+You should hide your loading indicator when this event is emitted.
+
+#### GoogleSignIn.didConnect
+
+An [`Event`](https://github.com/aleclarson/event) that emits
+when a user is successfully authorized.
+
+#### GoogleSignIn.didDisconnect
+
+An [`Event`](https://github.com/aleclarson/event) that emits
+when the current user is disconnected (or revoked).
+
+#### GoogleSignIn.disconnect()
 
 This function marks the current user as signed out.
 
@@ -79,10 +91,10 @@ The OAuth 2.0 token is **NOT** removed from the keychain.
 
 The return value is always `undefined`.
 
-#### GoogleSignIn.disconnect()
+#### GoogleSignIn.revoke()
 
 This function returns a [`Promise`](https://github.com/aleclarson/Promise)
 that resolves when the current user has successfully revoked its authentication.
 The `Promise` will be rejected if the request fails.
 
-Do **NOT** call `signOut` if you already called this function.
+It isn't necessary to call `disconnect` if you already called `revoke`.

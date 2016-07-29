@@ -8,39 +8,54 @@ RCT_EXPORT_MODULE();
 
 @synthesize bridge = _bridge;
 
+const NSString *SCOPE_USER_PROFILE = @"https://www.googleapis.com/auth/userinfo.profile";
+
 RCT_EXPORT_METHOD(configure:(NSDictionary*)config)
 {
   GIDSignIn *signIn = [GIDSignIn sharedInstance];
   signIn.delegate = self;
   signIn.uiDelegate = self;
 
-  signIn.scopes = config[@"scopes"];
+  // BUG: We shouldn't be forced to use 'shouldFetchBasicProfile'!
+  //      This makes it backwards compatible. Remove when no longer needed.
+  NSMutableArray *scopes = [NSMutableArray arrayWithArray:config[@"scopes"]];
+  if ([scopes containsObject:SCOPE_USER_PROFILE]) {
+    [scopes removeObject:SCOPE_USER_PROFILE];
+    signIn.shouldFetchBasicProfile = YES;
+  }
+
+  signIn.scopes = scopes;
   signIn.clientID = config[@"clientID"];
-  signIn.serverClientID = config[@"serverID"];
-  signIn.shouldFetchBasicProfile = NO;
+  signIn.serverClientID = config[@"serverClientID"];
 }
 
-RCT_EXPORT_METHOD(signIn)
-{
-  [[GIDSignIn sharedInstance] signIn];
-}
-
-RCT_EXPORT_METHOD(signInSilently)
-{
-  [[GIDSignIn sharedInstance] signInSilently];
-}
-
-RCT_EXPORT_METHOD(signOut)
-{
-  [[GIDSignIn sharedInstance] signOut];
-}
-
-RCT_EXPORT_METHOD(isConnected:(RCTPromiseResolveBlock)resolve)
+// 'hasAuthInKeychain' is renamed 'isConnected'
+RCT_EXPORT_METHOD(isConnected:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 {
   resolve(@([GIDSignIn sharedInstance].hasAuthInKeychain));
 }
 
+// 'signIn' is renamed 'connect'
+RCT_EXPORT_METHOD(connect)
+{
+  [[GIDSignIn sharedInstance] signIn];
+}
+
+// 'signInSilently' is renamed 'reconnect'
+RCT_EXPORT_METHOD(reconnect)
+{
+  [[GIDSignIn sharedInstance] signInSilently];
+}
+
+// 'signOut' is renamed 'disconnect'
 RCT_EXPORT_METHOD(disconnect)
+{
+  [[GIDSignIn sharedInstance] signOut];
+}
+
+// 'disconnect' is renamed 'revoke'
+RCT_EXPORT_METHOD(revoke)
 {
   [[GIDSignIn sharedInstance] disconnect];
 }
@@ -50,15 +65,12 @@ RCT_EXPORT_METHOD(disconnect)
   return dispatch_get_main_queue();
 }
 
-- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error
+- (void)signIn:(GIDSignIn *)signIn
+        didSignInForUser:(GIDGoogleUser *)user
+        withError:(NSError *)error
 {
   if (error != nil) {
-    return [_bridge.eventDispatcher
-      sendAppEventWithName:@"RNGoogleSignIn.connectFailed"
-      body:@{
-        @"message": error.description,
-        @"code": [NSNumber numberWithInteger: error.code]
-      }];
+    return [self dispatchError:error withName:@"connectFailed"];
   }
 
   NSMutableDictionary *body = [NSMutableDictionary dictionaryWithDictionary:@{
@@ -66,14 +78,21 @@ RCT_EXPORT_METHOD(disconnect)
     @"accessTokenExpirationDate": [NSNumber numberWithDouble:user.authentication.accessTokenExpirationDate.timeIntervalSince1970],
   }];
 
-  if (user.serverAuthCode) {
+  // Used to identify a user on the server-side.
+  if (user.authentication.idToken) {
     [body setValuesForKeysWithDictionary:@{
       @"idToken": user.authentication.idToken,
       @"idTokenExpirationDate": [NSNumber numberWithDouble:user.authentication.idTokenExpirationDate.timeIntervalSince1970],
-      @"serverAuthCode": user.serverAuthCode ? user.serverAuthCode : [NSNull null],
     }];
   }
 
+  // Only exists when 'signIn.serverClientID' is set.
+  if (user.serverAuthCode) {
+    [body setValue:user.serverAuthCode
+            forKey:@"serverAuthCode"];
+  }
+
+  // Only exists if 'SCOPE_USER_PROFILE' is included in 'config.scopes'.
   if (user.userID) {
     GIDProfileData *profile = user.profile;
     NSURL *imageURL = profile.hasImage ? [profile imageURLWithDimension:120] : nil;
@@ -87,35 +106,52 @@ RCT_EXPORT_METHOD(disconnect)
     };
   }
 
+  NSLog(@"[RNGoogleSignIn] connected");
   return [_bridge.eventDispatcher
     sendAppEventWithName:@"RNGoogleSignIn.connected"
     body:body];
 }
 
-- (void) signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error
+- (void) signInWillDispatch:(GIDSignIn *)signIn
+         error:(NSError *)error
 {
+  if (error != nil) {
+    return [self dispatchError:error withName:@"connectFailed"];
+  }
+
   return [_bridge.eventDispatcher
     sendAppEventWithName:@"RNGoogleSignIn.connecting"
     body:@{}];
 }
 
-- (void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error
+- (void)signIn:(GIDSignIn *)signIn
+        didDisconnectWithUser:(GIDGoogleUser *)user
+        withError:(NSError *)error
 {
   if (error != nil) {
-    return [_bridge.eventDispatcher
-      sendAppEventWithName:@"RNGoogleSignIn.disconnectFailed"
-      body:@{
-        @"message": error.description,
-        @"code": [NSNumber numberWithInteger: error.code]
-      }];
+    return [self dispatchError:error withName:@"revokeFailed"];
   }
 
+  NSLog(@"[RNGoogleSignIn] disconnected");
   return [_bridge.eventDispatcher
-    sendAppEventWithName:@"RNGoogleSignIn.disconnected"
+    sendAppEventWithName:@"RNGoogleSignIn.revoked"
     body:@{}];
 }
 
-- (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController
+- (void)dispatchError:(NSError *)error
+        withName:(NSString *)name
+{
+  NSLog(@"[RNGoogleSignIn] %@", error.description);
+  return [_bridge.eventDispatcher
+    sendAppEventWithName:[NSString stringWithFormat:@"RNGoogleSignIn.%@", name]
+    body:@{
+      @"message": error.description,
+      @"code": [NSNumber numberWithInteger: error.code]
+    }];
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+        presentViewController:(UIViewController *)viewController
 {
   UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
   [rootViewController
@@ -124,14 +160,18 @@ RCT_EXPORT_METHOD(disconnect)
     completion:nil];
 }
 
-- (void)signIn:(GIDSignIn *)signIn dismissViewController:(UIViewController *)viewController
+- (void)signIn:(GIDSignIn *)signIn
+        dismissViewController:(UIViewController *)viewController
 {
   [viewController
     dismissViewControllerAnimated:true
     completion:nil];
 }
 
-+ (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
++ (BOOL)application:(UIApplication *)application
+        openURL:(NSURL *)url
+        sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation
 {
   return [[GIDSignIn sharedInstance]
     handleURL:url

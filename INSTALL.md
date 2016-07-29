@@ -3,7 +3,7 @@
 
 Use these steps to manually install this library.
 
-❗️**NOTE:** CocoaPods is not yet supported.
+❗️**NOTE:** RNPM and CocoaPods are not yet supported.
 
 🚫**DANGER:** These instructions may result in compiler errors! Please create an issue if you have problems!
 
