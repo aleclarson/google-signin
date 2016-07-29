@@ -1,14 +1,14 @@
 {
   "name": "google-signin",
-  "version": "1.0.0",
-  "main": "js/src/index",
+  "version": "2.0.0",
+  "main": "js/index",
   "dependencies": {
     "ArrayOf": "aleclarson/ArrayOf#1.0.0",
     "Event": "aleclarson/Event#2.0.0",
-    "Maybe": "aleclarson/Maybe#1.0.0",
+    "Maybe": "aleclarson/Maybe#1.0.1",
     "Promise": "aleclarson/Promise#1.0.0",
-    "Type": "aleclarson/Type#1.0.0",
-    "assertTypes": "aleclarson/assertTypes#1.0.0",
+    "Type": "aleclarson/Type#1.1.0",
+    "assertTypes": "aleclarson/assertTypes#2.0.0",
     "isConstructor": "aleclarson/isConstructor#1.0.0"
   },
   "lotus": {
