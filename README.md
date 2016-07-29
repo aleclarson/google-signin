@@ -1,5 +1,5 @@
 
-# google-signin 1.0.0 ![experimental](https://img.shields.io/badge/stability-experimental-EC5315.svg?style=flat)
+# google-signin v2.0.0 ![experimental](https://img.shields.io/badge/stability-experimental-EC5315.svg?style=flat)
 
 > Provides native methods for signing into a Google account.
 
