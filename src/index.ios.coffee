@@ -60,7 +60,6 @@ type.defineMethods
       scopes: Maybe ArrayOf String
 
     RNGoogleSignIn.configure config
-    @_connected or @reconnect()
     return
 
   connect: ->

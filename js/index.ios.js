@@ -71,7 +71,6 @@ type.defineMethods({
       scopes: Maybe(ArrayOf(String))
     });
     RNGoogleSignIn.configure(config);
-    this._connected || this.reconnect();
   },
   connect: function() {
     assert(!this._connected, "Already connected to Google!");
