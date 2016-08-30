@@ -27,7 +27,7 @@ type.defineEvents
 
   willConnect: null
 
-  didConnect: null
+  didConnect: {json: Object}
 
   didDisconnect: null
 
@@ -66,7 +66,7 @@ type.defineMethods
     assert not @_connected, "Already connected to Google!"
     return @_connect() if not @isReconnecting
     return @_reconnecting.promise
-    .then (res) => if @_connected then res else @_connect()
+      .fail => @_connect()
 
   reconnect: ->
     assert not @_connected, "Already connected to Google!"
@@ -134,7 +134,7 @@ type.defineMethods
         @_reconnecting = null
         reconnecting.resolve json
 
-      @_events.emit "didConnect"
+      @_events.emit "didConnect", [json]
 
     connectFailed: (error) =>
 

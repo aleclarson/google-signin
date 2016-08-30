@@ -31,7 +31,9 @@ type.defineValues({
 
 type.defineEvents({
   willConnect: null,
-  didConnect: null,
+  didConnect: {
+    json: Object
+  },
   didDisconnect: null
 });
 
@@ -77,13 +79,9 @@ type.defineMethods({
     if (!this.isReconnecting) {
       return this._connect();
     }
-    return this._reconnecting.promise.then((function(_this) {
-      return function(res) {
-        if (_this._connected) {
-          return res;
-        } else {
-          return _this._connect();
-        }
+    return this._reconnecting.promise.fail((function(_this) {
+      return function() {
+        return _this._connect();
       };
     })(this));
   },
@@ -159,7 +157,7 @@ type.defineMethods({
             _this._reconnecting = null;
             reconnecting.resolve(json);
           }
-          return _this._events.emit("didConnect");
+          return _this._events.emit("didConnect", [json]);
         };
       })(this),
       connectFailed: (function(_this) {
