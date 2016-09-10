@@ -5,7 +5,6 @@ isConstructor = require "isConstructor"
 assertTypes = require "assertTypes"
 Promise = require "Promise"
 ArrayOf = require "ArrayOf"
-assert = require "assert"
 Maybe = require "Maybe"
 Type = require "Type"
 
@@ -63,13 +62,15 @@ type.defineMethods
     return
 
   connect: ->
-    assert not @_connected, "Already connected to Google!"
+    if @_connected
+      throw Error "Already connected!"
     return @_connect() if not @isReconnecting
     return @_reconnecting.promise
       .fail => @_connect()
 
   reconnect: ->
-    assert not @_connected, "Already connected to Google!"
+    if @_connected
+      throw Error "Already connected!"
     if not @isReconnecting
       @_reconnecting = Promise.defer()
       RNGoogleSignIn.reconnect()
@@ -98,7 +99,7 @@ type.defineMethods
     @_reconnecting = null
     if @_connected
       @_connected = no
-      @_events.emit "didDisconnect"
+      @__events.didDisconnect()
     return
 
   _addNativeListeners: (listeners) ->
@@ -109,7 +110,9 @@ type.defineMethods
 
   _createNativeListeners: ->
 
-    connecting: => @_events.emit "willConnect"
+    connecting: =>
+      @__events.willConnect()
+      return
 
     connected: (json) =>
 
@@ -134,7 +137,9 @@ type.defineMethods
         @_reconnecting = null
         reconnecting.resolve json
 
-      @_events.emit "didConnect", [json]
+      global.nativeLoggingHook? @__name + ".didConnect()", 1
+      @__events.didConnect json
+      return
 
     connectFailed: (error) =>
 
@@ -142,7 +147,7 @@ type.defineMethods
       reconnecting = @_reconnecting
       return unless connecting or reconnecting
 
-      error = Error errorCodes[error.code]
+      error = Error errorCodes[error.code] or "Unrecognized error: #{error.message}"
 
       if connecting
         connecting.reject error
@@ -151,15 +156,18 @@ type.defineMethods
       else if reconnecting
         reconnecting.reject error
         @_reconnecting = null
+      return
 
     revoked: =>
       if revoking = @_revoking
         revoking.resolve()
         @_revoking = null
+      return
 
     revokeFailed: (error) =>
       if revoking = @_revoking
         revoking.reject error
         @_revoking = null
+      return
 
 module.exports = type.construct()
