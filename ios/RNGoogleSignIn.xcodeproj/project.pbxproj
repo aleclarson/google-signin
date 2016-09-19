@@ -10,12 +10,12 @@
 		11CC15371CFE5AAD003A58DA /* RNGoogleSignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CC15361CFE5AAD003A58DA /* RNGoogleSignIn.m */; };
 		11CC154A1CFE7D76003A58DA /* RNGoogleSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC15341CFE5AAD003A58DA /* RNGoogleSignIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11CC15E91CFEA38B003A58DA /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 11CC15431CFE5DDB003A58DA /* GoogleSignIn.bundle */; };
-		11CC16411CFF0EE2003A58DA /* GIDAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163B1CFF0EE2003A58DA /* GIDAuthentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11CC16421CFF0EE2003A58DA /* GIDGoogleUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163C1CFF0EE2003A58DA /* GIDGoogleUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11CC16431CFF0EE2003A58DA /* GIDProfileData.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163D1CFF0EE2003A58DA /* GIDProfileData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11CC16441CFF0EE2003A58DA /* GIDSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163E1CFF0EE2003A58DA /* GIDSignIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11CC16451CFF0EE2003A58DA /* GIDSignInButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163F1CFF0EE2003A58DA /* GIDSignInButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11CC16461CFF0EE2003A58DA /* GoogleSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC16401CFF0EE2003A58DA /* GoogleSignIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11CC16411CFF0EE2003A58DA /* GIDAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163B1CFF0EE2003A58DA /* GIDAuthentication.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16421CFF0EE2003A58DA /* GIDGoogleUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163C1CFF0EE2003A58DA /* GIDGoogleUser.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16431CFF0EE2003A58DA /* GIDProfileData.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163D1CFF0EE2003A58DA /* GIDProfileData.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16441CFF0EE2003A58DA /* GIDSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163E1CFF0EE2003A58DA /* GIDSignIn.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16451CFF0EE2003A58DA /* GIDSignInButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163F1CFF0EE2003A58DA /* GIDSignInButton.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16461CFF0EE2003A58DA /* GoogleSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC16401CFF0EE2003A58DA /* GoogleSignIn.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		11CC16481CFF1152003A58DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16471CFF1152003A58DA /* GoogleSignIn */; };
 		11CC164A1CFF1161003A58DA /* GoogleAppUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16491CFF1161003A58DA /* GoogleAppUtilities */; };
 		11CC164C1CFF1168003A58DA /* GoogleAuthUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC164B1CFF1168003A58DA /* GoogleAuthUtilities */; };
@@ -114,13 +114,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11CC154A1CFE7D76003A58DA /* RNGoogleSignIn.h in Headers */,
 				11CC16421CFF0EE2003A58DA /* GIDGoogleUser.h in Headers */,
 				11CC16431CFF0EE2003A58DA /* GIDProfileData.h in Headers */,
 				11CC16441CFF0EE2003A58DA /* GIDSignIn.h in Headers */,
 				11CC16451CFF0EE2003A58DA /* GIDSignInButton.h in Headers */,
 				11CC16461CFF0EE2003A58DA /* GoogleSignIn.h in Headers */,
 				11CC16411CFF0EE2003A58DA /* GIDAuthentication.h in Headers */,
-				11CC154A1CFE7D76003A58DA /* RNGoogleSignIn.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,22 +285,28 @@
 		11CC153B1CFE5AAD003A58DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/**";
 			};
 			name = Debug;
 		};
 		11CC153C1CFE5AAD003A58DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/**";
 			};
 			name = Release;
 		};

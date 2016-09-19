@@ -1,5 +1,5 @@
 
-#import <React/RCTEventDispatcher.h>
+#import "RCTEventDispatcher.h"
 #import "RNGoogleSignIn.h"
 
 @implementation RNGoogleSignIn

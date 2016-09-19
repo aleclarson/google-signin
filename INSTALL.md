@@ -1,101 +1,46 @@
 
-# install
+# install (ios only)
 
-Use these steps to manually install this library.
+Follow these steps to get started with `RNGoogleSignIn`!
 
-❗️**NOTE:** RNPM and CocoaPods are not yet supported.
+#### 1. Search paths
 
-🚫**DANGER:** These instructions may result in compiler errors! Please create an issue if you have problems!
+- Drag `ios/RNGoogleSignIn.xcodeproj` into your own Xcode project/workspace.
 
-#### Step 1
+- Goto `Build Settings` in **your project's target**.
 
-Drag `ios/RNGoogleSignIn.xcodeproj` into your own `*.xcodeproj`.
+- For both `Framework Search Paths` and `Header Search Paths`, add this to the list:
 
-#### Step 2
+```
+$(SRCROOT)/../node_modules/google-signin/ios/**
+```
 
-- Select your project in the `Project Navigator` sidebar.
+#### 2. Supporting files
 
-- Goto `Target > Info > URL Types`.
+- Follow the steps on [this page](https://developers.google.com/identity/sign-in/ios/start-integrating).
 
-- Create a new URL type.
+#### 3. Frameworks
 
-- Set the `URL Schemes` field to the value of `REVERSED_CLIENT_ID` in the config
-file you download from [this link.](https://developers.google.com/identity/sign-in/ios/sdk/#get-config)
-
-This step sets up a custom URL scheme that the Google Sign-In SDK will
-use to redirect the user back to your iOS application.
-
-#### Step 3
-
-- Select **your project** in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Phases > Link Binary With Libraries`.
+- Goto `Build Phases > Link Binary With Libraries` in **your project's target**.
 
 - Add these frameworks:
 
-  - `SystemConfiguration.framework`
-
-  - `SafariServices.framework`
-
-  - `AddressBook.framework`
-
-This step links any frameworks that the Google Sign-In SDK
-needs to work properly.
-
-#### Step 4
-
-- Select **your project** in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Settings > Linking`
-
-- Add `-lz` to the `Other Linker Flags` array
-
-This loads `libz.dylib` for the Google Sign-In SDK.
-
-#### Step 5
-
-- Select **your project** in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Settings > Search Paths`.
-
-- Add `$(BUILT_PRODUCTS_DIR)/include` to `Header Search Paths`.
-
-- Make sure the search path is marked as `recursive`.
-
-This step makes the public headers of `RNGoogleSignIn` visible
-to your own project's code.
-
-#### Step 6
-
-Some manual modifications to `React.xcodeproj` are needed
-before everything works as expected.
-
-- Select `React.xcodeproj` in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Phases`.
-
-- Create a new `Headers` phase.
-
-- Add every `*.h` file into the `Public` section.
-  (not every header is needed, but this way requires less thinking)
-
-- Goto `Target > Build Settings > Packaging`.
-
-- Set `Public Headers Folder Path` to `include/$(PRODUCT_NAME)`.
-
-This step makes the public headers of `React` visible
-to the code of `RNGoogleSignIn`.
-
-Now you can import something from `React` like this:
-
-```objc
-#import <React/RCTRootView.h>
+```
+SystemConfiguration.framework
+SafariServices.framework
+AddressBook.framework
 ```
 
-#### Step 7
+- Goto `Build Settings > Linking` in **your project's target**.
 
-Import the library like this:
+- Add `-lz` to the `Other Linker Flags` array (this links `libz.dylib` for the SDK).
+
+#### 4. Import away!
 
 ```objc
-#import <RNGoogleSignIn/RNGoogleSignIn.h>
+#import "RNGoogleSignIn.h"
 ```
+
+#### Run into a problem?
+
+Let me know in [the issues](https://github.com/aleclarson/google-signin/issues)!

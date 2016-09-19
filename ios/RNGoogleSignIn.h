@@ -1,7 +1,7 @@
 
-#import <React/RCTBridgeModule.h>
+#import "RCTBridgeModule.h"
 
-#import "GoogleSignIn.h"
+#import <GoogleSignIn/GIDSignIn.h>
 
 @interface RNGoogleSignIn : NSObject<RCTBridgeModule, GIDSignInDelegate, GIDSignInUIDelegate>
 
