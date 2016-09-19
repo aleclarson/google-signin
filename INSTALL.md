@@ -1,57 +1,46 @@
 
 # install (ios only)
 
-It's just 5 easy steps to using `RNGoogleSignIn`!
+Follow these steps to get started with `RNGoogleSignIn`!
 
-#### Step 1
+#### 1. Search paths
 
-Drag `ios/RNGoogleSignIn.xcodeproj` into your own `*.xcodeproj`.
+- Drag `ios/RNGoogleSignIn.xcodeproj` into your own Xcode project/workspace.
 
-#### Step 2
+- Goto `Build Settings` in **your project's target**.
 
-- Select your project in the `Project Navigator` sidebar.
+- For both `Framework Search Paths` and `Header Search Paths`, add this to the list:
 
-- Goto `Target > Info > URL Types`.
+```
+$(SRCROOT)/../node_modules/google-signin/ios/**
+```
 
-- Create a new URL type.
+#### 2. Supporting files
 
-- Set the `URL Schemes` field to the value of `REVERSED_CLIENT_ID` in the config
-file you download from [this link.](https://developers.google.com/identity/sign-in/ios/sdk/#get-config)
+- Follow the steps on [this page](https://developers.google.com/identity/sign-in/ios/start-integrating).
 
-This step sets up a custom URL scheme that the Google Sign-In SDK will
-use to redirect the user back to your iOS application.
+#### 3. Frameworks
 
-#### Step 3
-
-- Select **your project** in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Phases > Link Binary With Libraries`.
+- Goto `Build Phases > Link Binary With Libraries` in **your project's target**.
 
 - Add these frameworks:
 
-  - `SystemConfiguration.framework`
+```
+SystemConfiguration.framework
+SafariServices.framework
+AddressBook.framework
+```
 
-  - `SafariServices.framework`
+- Goto `Build Settings > Linking` in **your project's target**.
 
-  - `AddressBook.framework`
+- Add `-lz` to the `Other Linker Flags` array (this links `libz.dylib` for the SDK).
 
-This step links any frameworks that the Google Sign-In SDK
-needs to work properly.
-
-#### Step 4
-
-- Select **your project** in the `Project Navigator` sidebar.
-
-- Goto `Target > Build Settings > Linking`
-
-- Add `-lz` to the `Other Linker Flags` array
-
-This loads `libz.dylib` for the Google Sign-In SDK.
-
-#### Step 5
-
-Import the library like this:
+#### 4. Import away!
 
 ```objc
-#import <RNGoogleSignIn/RNGoogleSignIn.h>
+#import "RNGoogleSignIn.h"
 ```
+
+#### Run into a problem?
+
+Let me know in [the issues](https://github.com/aleclarson/google-signin/issues)!
