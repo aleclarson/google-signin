@@ -10,12 +10,12 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
-    "ArrayOf": "aleclarson/ArrayOf#1.0.0",
-    "Event": "aleclarson/Event#2.0.1",
-    "Maybe": "aleclarson/Maybe#1.0.1",
-    "Promise": "aleclarson/Promise#2.0.0",
-    "Type": "aleclarson/Type#1.1.0",
-    "assertTypes": "aleclarson/assertTypes#2.0.0",
+    "ArrayOf": "aleclarson/ArrayOf#1.1.0",
+    "Event": "aleclarson/Event#2.1.0",
+    "Maybe": "aleclarson/Maybe#1.0.2",
+    "Promise": "aleclarson/Promise#2.1.0",
+    "Type": "aleclarson/Type#2.1.0",
+    "assertTypes": "aleclarson/assertTypes#2.0.1",
     "isConstructor": "aleclarson/isConstructor#1.0.0"
   },
   "implicitDependencies": [
