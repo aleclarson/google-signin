@@ -1,0 +1,337 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11CC15371CFE5AAD003A58DA /* RNGoogleSignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CC15361CFE5AAD003A58DA /* RNGoogleSignIn.m */; };
+		11CC154A1CFE7D76003A58DA /* RNGoogleSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC15341CFE5AAD003A58DA /* RNGoogleSignIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11CC15E91CFEA38B003A58DA /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 11CC15431CFE5DDB003A58DA /* GoogleSignIn.bundle */; };
+		11CC16411CFF0EE2003A58DA /* GIDAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163B1CFF0EE2003A58DA /* GIDAuthentication.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16421CFF0EE2003A58DA /* GIDGoogleUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163C1CFF0EE2003A58DA /* GIDGoogleUser.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16431CFF0EE2003A58DA /* GIDProfileData.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163D1CFF0EE2003A58DA /* GIDProfileData.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16441CFF0EE2003A58DA /* GIDSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163E1CFF0EE2003A58DA /* GIDSignIn.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16451CFF0EE2003A58DA /* GIDSignInButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC163F1CFF0EE2003A58DA /* GIDSignInButton.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16461CFF0EE2003A58DA /* GoogleSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CC16401CFF0EE2003A58DA /* GoogleSignIn.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		11CC16481CFF1152003A58DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16471CFF1152003A58DA /* GoogleSignIn */; };
+		11CC164A1CFF1161003A58DA /* GoogleAppUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16491CFF1161003A58DA /* GoogleAppUtilities */; };
+		11CC164C1CFF1168003A58DA /* GoogleAuthUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC164B1CFF1168003A58DA /* GoogleAuthUtilities */; };
+		11CC164E1CFF116F003A58DA /* GoogleNetworkingUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC164D1CFF116F003A58DA /* GoogleNetworkingUtilities */; };
+		11CC16501CFF1178003A58DA /* GoogleUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC164F1CFF1178003A58DA /* GoogleUtilities */; };
+		11CC16521CFF117B003A58DA /* GoogleSymbolUtilities in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CC16511CFF117B003A58DA /* GoogleSymbolUtilities */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		11CC15311CFE5AAD003A58DA /* libRNGoogleSignIn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNGoogleSignIn.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		11CC15341CFE5AAD003A58DA /* RNGoogleSignIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNGoogleSignIn.h; sourceTree = SOURCE_ROOT; };
+		11CC15361CFE5AAD003A58DA /* RNGoogleSignIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNGoogleSignIn.m; sourceTree = SOURCE_ROOT; };
+		11CC15431CFE5DDB003A58DA /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = SOURCE_ROOT; };
+		11CC163B1CFF0EE2003A58DA /* GIDAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIDAuthentication.h; sourceTree = "<group>"; };
+		11CC163C1CFF0EE2003A58DA /* GIDGoogleUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIDGoogleUser.h; sourceTree = "<group>"; };
+		11CC163D1CFF0EE2003A58DA /* GIDProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIDProfileData.h; sourceTree = "<group>"; };
+		11CC163E1CFF0EE2003A58DA /* GIDSignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIDSignIn.h; sourceTree = "<group>"; };
+		11CC163F1CFF0EE2003A58DA /* GIDSignInButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIDSignInButton.h; sourceTree = "<group>"; };
+		11CC16401CFF0EE2003A58DA /* GoogleSignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleSignIn.h; sourceTree = "<group>"; };
+		11CC16471CFF1152003A58DA /* GoogleSignIn */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleSignIn; path = GoogleSignIn.framework/GoogleSignIn; sourceTree = SOURCE_ROOT; };
+		11CC16491CFF1161003A58DA /* GoogleAppUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleAppUtilities; path = GoogleAppUtilities.framework/GoogleAppUtilities; sourceTree = SOURCE_ROOT; };
+		11CC164B1CFF1168003A58DA /* GoogleAuthUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleAuthUtilities; path = GoogleAuthUtilities.framework/GoogleAuthUtilities; sourceTree = SOURCE_ROOT; };
+		11CC164D1CFF116F003A58DA /* GoogleNetworkingUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleNetworkingUtilities; path = GoogleNetworkingUtilities.framework/GoogleNetworkingUtilities; sourceTree = SOURCE_ROOT; };
+		11CC164F1CFF1178003A58DA /* GoogleUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleUtilities; path = GoogleUtilities.framework/GoogleUtilities; sourceTree = SOURCE_ROOT; };
+		11CC16511CFF117B003A58DA /* GoogleSymbolUtilities */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleSymbolUtilities; path = GoogleSymbolUtilities.framework/GoogleSymbolUtilities; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11CC152E1CFE5AAD003A58DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11CC16481CFF1152003A58DA /* GoogleSignIn in Frameworks */,
+				11CC16521CFF117B003A58DA /* GoogleSymbolUtilities in Frameworks */,
+				11CC164C1CFF1168003A58DA /* GoogleAuthUtilities in Frameworks */,
+				11CC164A1CFF1161003A58DA /* GoogleAppUtilities in Frameworks */,
+				11CC16501CFF1178003A58DA /* GoogleUtilities in Frameworks */,
+				11CC164E1CFF116F003A58DA /* GoogleNetworkingUtilities in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11CC15281CFE5AAD003A58DA = {
+			isa = PBXGroup;
+			children = (
+				11CC15341CFE5AAD003A58DA /* RNGoogleSignIn.h */,
+				11CC15361CFE5AAD003A58DA /* RNGoogleSignIn.m */,
+				11CC163A1CFF0EE2003A58DA /* Headers */,
+				11CC15F01CFEA410003A58DA /* Libraries */,
+				11CC15321CFE5AAD003A58DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		11CC15321CFE5AAD003A58DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				11CC15311CFE5AAD003A58DA /* libRNGoogleSignIn.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		11CC15F01CFEA410003A58DA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				11CC15431CFE5DDB003A58DA /* GoogleSignIn.bundle */,
+				11CC16511CFF117B003A58DA /* GoogleSymbolUtilities */,
+				11CC164F1CFF1178003A58DA /* GoogleUtilities */,
+				11CC164D1CFF116F003A58DA /* GoogleNetworkingUtilities */,
+				11CC164B1CFF1168003A58DA /* GoogleAuthUtilities */,
+				11CC16491CFF1161003A58DA /* GoogleAppUtilities */,
+				11CC16471CFF1152003A58DA /* GoogleSignIn */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		11CC163A1CFF0EE2003A58DA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				11CC163B1CFF0EE2003A58DA /* GIDAuthentication.h */,
+				11CC163C1CFF0EE2003A58DA /* GIDGoogleUser.h */,
+				11CC163D1CFF0EE2003A58DA /* GIDProfileData.h */,
+				11CC163E1CFF0EE2003A58DA /* GIDSignIn.h */,
+				11CC163F1CFF0EE2003A58DA /* GIDSignInButton.h */,
+				11CC16401CFF0EE2003A58DA /* GoogleSignIn.h */,
+			);
+			name = Headers;
+			path = GoogleSignIn.framework/Headers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		11CC15491CFE7D71003A58DA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11CC154A1CFE7D76003A58DA /* RNGoogleSignIn.h in Headers */,
+				11CC16421CFF0EE2003A58DA /* GIDGoogleUser.h in Headers */,
+				11CC16431CFF0EE2003A58DA /* GIDProfileData.h in Headers */,
+				11CC16441CFF0EE2003A58DA /* GIDSignIn.h in Headers */,
+				11CC16451CFF0EE2003A58DA /* GIDSignInButton.h in Headers */,
+				11CC16461CFF0EE2003A58DA /* GoogleSignIn.h in Headers */,
+				11CC16411CFF0EE2003A58DA /* GIDAuthentication.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		11CC15301CFE5AAD003A58DA /* RNGoogleSignIn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11CC153A1CFE5AAD003A58DA /* Build configuration list for PBXNativeTarget "RNGoogleSignIn" */;
+			buildPhases = (
+				11CC152D1CFE5AAD003A58DA /* Sources */,
+				11CC152E1CFE5AAD003A58DA /* Frameworks */,
+				11CC15491CFE7D71003A58DA /* Headers */,
+				11CC15E81CFEA387003A58DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNGoogleSignIn;
+			productName = RNGoogleSignIn;
+			productReference = 11CC15311CFE5AAD003A58DA /* libRNGoogleSignIn.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		11CC15291CFE5AAD003A58DA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Alec Larson";
+				TargetAttributes = {
+					11CC15301CFE5AAD003A58DA = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = SQQ8684MNF;
+					};
+				};
+			};
+			buildConfigurationList = 11CC152C1CFE5AAD003A58DA /* Build configuration list for PBXProject "RNGoogleSignIn" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 11CC15281CFE5AAD003A58DA;
+			productRefGroup = 11CC15321CFE5AAD003A58DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				11CC15301CFE5AAD003A58DA /* RNGoogleSignIn */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11CC15E81CFEA387003A58DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11CC15E91CFEA38B003A58DA /* GoogleSignIn.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11CC152D1CFE5AAD003A58DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11CC15371CFE5AAD003A58DA /* RNGoogleSignIn.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		11CC15381CFE5AAD003A58DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		11CC15391CFE5AAD003A58DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		11CC153B1CFE5AAD003A58DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		11CC153C1CFE5AAD003A58DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11CC152C1CFE5AAD003A58DA /* Build configuration list for PBXProject "RNGoogleSignIn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11CC15381CFE5AAD003A58DA /* Debug */,
+				11CC15391CFE5AAD003A58DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11CC153A1CFE5AAD003A58DA /* Build configuration list for PBXNativeTarget "RNGoogleSignIn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11CC153B1CFE5AAD003A58DA /* Debug */,
+				11CC153C1CFE5AAD003A58DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 11CC15291CFE5AAD003A58DA /* Project object */;
+}
